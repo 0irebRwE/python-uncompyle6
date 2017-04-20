@@ -258,12 +258,12 @@ class Python3Parser(PythonParser):
         jt_cf   ::= jmp_true COME_FROM
 
         or  ::= expr jt_cf    expr
-        or  ::= expr jifp_cf  expr
         or  ::= expr jmp_true expr COME_FROM
+        or  ::= expr jitp_cf  expr
 
         and ::= expr jmp_false expr
-        and ::= expr jitp_cf   expr
         and ::= expr jmp_false expr COME_FROM
+        and ::= expr jifp_cf   expr
         '''
 
     def p_misc3(self, args):
