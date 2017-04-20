@@ -21,3 +21,9 @@ elif __file__:
     assert __name__ or __file__
 else:
     pass
+
+if __name__:
+    if __file__:
+        pass
+    elif __doc__:
+        pass

@@ -726,7 +726,12 @@ class Scanner3(Scanner):
 
             if ((code[prev_op[target]] in self.pop_jump_if_pop) and
                 (target > offset) and prev_op[target] != offset):
-                self.fixed_jumps[offset] = prev_op[target]
+                if self.version < 3.5:
+                    # FIXME: this is wrong, but until other tests and code is sync'd
+                    # we use this lie about where the COME_FROM comes from.
+                    self.fixed_jumps[offset] = prev_op[target]
+                else:
+                    self.fixed_jumps[offset] = target
                 self.structs.append({'type': 'and/or',
                                      'start': start,
                                      'end': prev_op[target]})

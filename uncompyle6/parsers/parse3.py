@@ -253,8 +253,17 @@ class Python3Parser(PythonParser):
                 POP_BLOCK LOAD_CONST COME_FROM_WITH
                 WITH_CLEANUP END_FINALLY
 
+        jitp_cf ::= JUMP_IF_TRUE_OR_POP COME_FROM
+        jifp_cf ::= JUMP_IF_FALSE_OR_POP COME_FROM
+        jt_cf   ::= jmp_true COME_FROM
+
+        or  ::= expr jt_cf    expr
+        or  ::= expr jifp_cf  expr
+        or  ::= expr jmp_true expr COME_FROM
+
+        and ::= expr jmp_false expr
+        and ::= expr jitp_cf   expr
         and ::= expr jmp_false expr COME_FROM
-        or  ::= expr jmp_true  expr COME_FROM
         '''
 
     def p_misc3(self, args):
